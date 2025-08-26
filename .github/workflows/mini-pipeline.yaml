@@ -1,0 +1,26 @@
+name: Mini Pipeline CI/CD
+
+on:
+  push:
+    branches: [ master, nouvelle-branche ]
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cloner le dépôt
+        uses: actions/checkout@v3
+
+      - name: Vérifier readme.txt
+        run: |
+          if [ -f readme.txt ]; then
+            echo "readme.txt existe ✅"
+          else
+            echo "readme.txt manquant ❌"
+            exit 1
+          fi
+
+      - name: Test QA simulé
+        run: |
+          echo "Lancement des tests QA…"
+          echo "Tous les tests passent ✅"
